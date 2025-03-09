@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -37,10 +38,10 @@ public class Controller {
     @PostMapping("/transacao")
     public ResponseEntity<?> transaction(@RequestBody User user) {
 
-        service.transaction(user);
+        var newUser = service.transaction(user);
 
         stats.forEach(s -> {
-            s.accept(user.getValor());
+            s.accept(newUser.getValor());
         });
 
         return ResponseEntity.status(HttpStatus.CREATED).build();

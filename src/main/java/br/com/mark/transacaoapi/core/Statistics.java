@@ -3,9 +3,13 @@ package br.com.mark.transacaoapi.core;
 public class Statistics {
 
     private Long count;
+
     private double sum;
+
     private double avg;
+
     private double min;
+
     private double max;
 
     public Statistics(Long count, double sum, double avg, double min, double max) {

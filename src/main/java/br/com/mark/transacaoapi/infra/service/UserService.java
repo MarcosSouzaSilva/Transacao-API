@@ -18,14 +18,12 @@ public class UserService {
     }
 
 
-    public void transaction(User user)  {
+    public User transaction(User user)  {
 
         User userSaved = transaction.transaction(user);
 
-        /*System.out.println("Valor : " + userSaved.getValor() );
-        System.out.println("Data Hora : " + userSaved.getDataHora());*/
-
         log.info("Endpoint de transação, deu certo, retornou um usuário");
+        return userSaved;
     }
 
 }
