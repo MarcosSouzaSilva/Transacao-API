@@ -2,9 +2,17 @@ package br.com.mark.transacaoapi.core;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.OffsetDateTime;
 
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     @JsonProperty("valor")
@@ -15,20 +23,6 @@ public class User {
     private OffsetDateTime dataHora;
 
 
-    public Double getValor() {
-        return valor;
-    }
 
-    public void setValor(Double valor) {
-        this.valor = valor;
-    }
-
-    public OffsetDateTime  getDataHora() {
-        return dataHora;
-    }
-
-    public void setDataHora(OffsetDateTime  dataHora) {
-        this.dataHora = dataHora;
-    }
 
 }

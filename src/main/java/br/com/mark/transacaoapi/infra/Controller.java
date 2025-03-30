@@ -44,17 +44,12 @@ public class Controller {
             s.accept(newUser.getValor());
         });
 
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
     }
 
     @DeleteMapping("/delete")
     public ResponseEntity<?> delete() {
-
-        stats.clear();
-
-        stats.add(new DoubleSummaryStatistics());
-
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return service.delete();
     }
 
     @GetMapping("/estatistica")
