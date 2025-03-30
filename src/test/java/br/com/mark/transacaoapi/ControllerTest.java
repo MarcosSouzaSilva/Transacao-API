@@ -59,16 +59,11 @@ public class ControllerTest {
 
 
     @BeforeEach
-    public void setup () {
-        /*saved();
-        delete();*/
+    public void setup() throws Exception {
+
         stats.add(new DoubleSummaryStatistics());
         dataHora = OffsetDateTime.parse("2020-08-07T12:34:56.789-03:00");
         user = User.builder().valor(4.0).dataHora(dataHora).build();
-
-        stats.forEach(p -> {
-            p.accept(user.getValor());
-        });
 
     }
 
@@ -78,6 +73,9 @@ public class ControllerTest {
 
         BDDMockito.given(userService.transaction(Mockito.any(User.class))).willReturn(user);
 
+        stats.forEach(s -> {
+            s.accept(user.getValor());
+        });
 
         ObjectMapper objectMapper = new ObjectMapper();
         // Permite o suporte às classes de data/hora do Java 8+ (LocalDate, LocalDateTime)
@@ -100,37 +98,24 @@ public class ControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("valor").value(4.0));
     }
 
-    public ResponseEntity<Object> deletes() {
 
-        stats.clear();
-
-        stats.add(new DoubleSummaryStatistics());
-
-        return ResponseEntity.status(HttpStatus.OK).build();
+    public void clear() {
+        user.setValor(null);
+        user.setDataHora(null);
     }
 
     @Test
     @DisplayName("Apaga usuario em memoria")
-    public void delete () throws Exception {
+    public void delete() throws Exception {
 
         saved();
 
-        System.err.println(user.getValor());
-
-        stats.clear();
-
-        stats.add(new DoubleSummaryStatistics());
-
-        System.err.println(user.getValor());
+        clear();
 
         assertThat(user.getValor()).isNull();
         assertThat(user.getDataHora()).isNull();
 
-
-
     }
-
-
 
 
     /*@Test
