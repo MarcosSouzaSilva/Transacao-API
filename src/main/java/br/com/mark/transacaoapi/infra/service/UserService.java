@@ -22,9 +22,7 @@ public class UserService {
 
         Transaction transaction = new Transaction();
 
-        var value = transaction.transaction(user);
-
-        return value;
+        return transaction.transaction(user);
     }
 
     public ResponseEntity<?> delete() {
